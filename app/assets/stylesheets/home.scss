@@ -1,0 +1,36 @@
+ul li{list-style: none;}
+h1,h2,h3,h4,h5,h6{color: #272727;}
+a, a:hover{
+	color: #272727;
+	text-decoration: none;
+	background: transparent !important;
+}
+.btn{border-radius: 0px !important;}
+body{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+}
+
+.navbar-top{
+	border-radius: 0px !important;
+	background-color: #a7c35c;
+
+    a, a:hover{color: #fff;}
+
+    ul li{font-size: 11px;}
+}
+
+#front{
+	text-align: center;
+    margin-top: 4em;
+
+	.home_bg{
+		position: absolute;
+	    top: 0;
+	    z-index: -1;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	}
+	.title{font-weight: 700;}
+}
