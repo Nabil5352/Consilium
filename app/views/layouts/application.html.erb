@@ -10,6 +10,9 @@
 
   <body>
     <%= render "layouts/navigation" %>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
     <% unless flash.empty? %>
        <script type="text/javascript">
           <% flash.each do |f| %>
@@ -18,9 +21,5 @@
           <% end %>
        </script>
     <% end %>
-
-    <div class="container-fluid">
-      <%= yield %>
-    </div>
   </body>
 </html>

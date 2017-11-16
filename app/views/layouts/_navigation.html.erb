@@ -1,7 +1,7 @@
 <nav class="navbar navbar-top">
   <div class="container">
     <div class="navbar-header">
-      <%= link_to 'Project Consilium', root_path, class: 'navbar-brand' %>
+      <%= link_to 'Project Consilium', '/', class: 'navbar-brand' %>
     </div>
 
     <div id="navbar">
@@ -11,7 +11,7 @@
       <ul class="nav navbar-nav pull-right">
 
         <% if user_signed_in? %>
-          <li><%= current_user.email %></li>
+          <li><%= link_to current_user.email, '' %></li>
           <li><%= link_to 'LOG OUT', destroy_user_session_path, method: :delete %></li>
         <% else %>
           <li><%= link_to 'SIGN IN', new_user_session_path %></li>
