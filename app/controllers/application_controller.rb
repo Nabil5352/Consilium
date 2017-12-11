@@ -17,4 +17,46 @@ class ApplicationController < ActionController::Base
 		flash[:alert] = "You are not authorized to perform this action."
 		redirect_to(request.referrer || root_path)
 	end
+
+	def super_admin_only!
+		unless current_user.superadmin?
+			flash[:alert] = "You are not authorized!"
+			redirect_to "/"
+		end
+	end
+
+	def org_super_admin_only!
+		unless current_user.org_super_admin?
+			flash[:alert] = "You are not authorized!"
+			redirect_to "/"
+		end
+	end
+
+	def dept_admin_only!
+		unless current_user.dept_admin?
+			flash[:alert] = "You are not authorized!"
+			redirect_to "/"
+		end
+	end
+
+	def dept_editor_only!
+		unless current_user.dept_editor?
+			flash[:alert] = "You are not authorized!"
+			redirect_to "/"
+		end
+	end
+
+	def dept_reviewer_only!
+		unless current_user.dept_reviewer?
+			flash[:alert] = "You are not authorized!"
+			redirect_to "/"
+		end
+	end
+
+	def student_only!
+		unless current_user.student?
+			flash[:alert] = "You are not authorized!"
+			redirect_to "/"
+		end
+	end
 end

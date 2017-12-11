@@ -1,6 +1,42 @@
-<ul>
 
-	<li><%= link_to 'All Users', users_path %></li>
 
-	Site admin
-</ul>
+<section id="dashboard-home">
+	<div class="row">
+		<div class="col-sm-12 request-org">
+			<%= link_to "CREATE AN ORGANIZATION", new_organization_path, :class => "btn btn-primary" %>
+		</div><br><br>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-sm-12">
+
+			<% @organizations.each do |organization| %>
+			<div class="col-sm-3 org-box">
+				<div class="org-box-wrapper">
+					<div class="title"><a href=""><%= organization.name %></a></div>
+					<div class="info">
+						<ul>
+							<li class="members"><%= User.all.where(organization_id: organization.id).count > 0 ? User.all.where(organization_id: organization.id).count : 0 %> members</li>
+							<li></li>
+							<% if User.find(@currentUser).requests.where(org_id: organization.id).where(status: 0).exists? %>
+								<li>
+									<button class="btn btn-warning">Pending</button>
+								</li>
+							<% elsif User.find(@currentUser).requests.where(org_id: organization.id).where(status: 1).exists? %>
+								<li><%= link_to "Enter", organization_path(organization.id), :class=>"btn btn-primary" %></li>
+								<li>
+									<button class="btn btn-success">Member</button>
+								</li>
+							<% else %>
+								<li>
+									<%= link_to "Request to join", org_join_request_dashboard_index_path(:id => organization.id), :class => "btn btn-info" %>
+								</li>
+							<% end %>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</section><!--#dashboard-home-->

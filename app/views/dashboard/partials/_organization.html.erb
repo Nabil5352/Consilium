@@ -1,0 +1,32 @@
+<br>
+<div class="row">
+
+	<div class="col-sm-6 dept-box">
+		<h3><strong>MY ORGANIZATION</strong></h3>
+		<div class="dept-box-wrapper">
+			<div class="row dept-row">
+				<div class="col-sm-6 dept-icon"> 
+					<%if @cu_organization.image.present?%>
+						<%= image_tag "#{@cu_organization.image}" %>
+					<%end%>
+				</div>
+				<div class="col-sm-6"> <%= @cu_organization.name%> </div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-6 dept-box">
+		<h3><strong>MY DEPARTMENT</strong></h3>
+		<div class="dept-box-wrapper">
+			<div class="row dept-row">
+				<div class="col-sm-6 dept-icon"> 
+					<%if @cu_department.image.present?%>
+						<%= image_tag "#{@cu_department.image}" %>
+					<%end%>
+				</div>
+				<div class="col-sm-6"> <%=@cu_department.name%> </div>
+			</div>
+		</div>
+	</div>
+
+</div>

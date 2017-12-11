@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171112180612) do
+ActiveRecord::Schema.define(version: 20171211144554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,44 @@ ActiveRecord::Schema.define(version: 20171112180612) do
   create_table "dashboards", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.integer "organization_id"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  create_table "dept_requests", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "status"
+    t.datetime "requests"
+    t.integer "department_id"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.integer "member"
+    t.integer "status", null: false
+    t.string "description", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "super_admin"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "org_id"
+    t.integer "status"
+    t.datetime "requested_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,6 +76,8 @@ ActiveRecord::Schema.define(version: 20171112180612) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role"
+    t.integer "organization_id"
+    t.integer "department_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

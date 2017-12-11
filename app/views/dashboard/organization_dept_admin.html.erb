@@ -1,1 +1,53 @@
-DEPT ADMIN
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+	<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Overview</a></li>
+	<li role="presentation"><a href="#request" aria-controls="request" role="tab" data-toggle="tab">Requests</a></li>
+	<li role="presentation"><a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">Activity</a></li>
+	<li role="presentation"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">Account</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+<div role="tabpanel" class="tab-pane active" id="home">...</div>
+<div role="tabpanel" class="tab-pane" id="request">
+	<table class="table table-striped">
+		<thead>
+			<th>Organization</th>
+			<th>Requested from</th>
+			<th>Status</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<% @requests.each do |request| %>
+			<tr>
+				<td><%= request.department.nil? ? "": request.department.name %></td>
+				<td><%= request.user.email %></td>
+				<td>
+					<% if request.status == 0 %>
+						Pending
+					<% elsif request.status == 2 %>
+						Rejected
+					<% else %>
+						Approved
+					<% end %>
+				</td>
+				<td>
+					<% if request.status == 0 %>
+						<%= link_to "Approve", approve_dept_user_dashboard_index_path(:id => request.id) %>
+						&nbsp;&#8226;&nbsp;
+						<%= link_to "Reject", reject_dept_user_dashboard_index_path(:id => request.id) %>
+					<% elsif request.status == 2 %>
+						<%= link_to "Approve", approve_dept_user_dashboard_index_path(:id => request.id) %>
+					<% else %>
+						<%= link_to "Reject", reject_dept_user_dashboard_index_path(:id => request.id) %>
+					<% end %>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	
+</div>
+<div role="tabpanel" class="tab-pane" id="activity">...</div>
+<div role="tabpanel" class="tab-pane" id="account">...</div>
+</div>

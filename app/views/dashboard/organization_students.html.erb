@@ -1,1 +1,21 @@
-Students
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+	<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Dashboard</a></li>
+	<li role="presentation"><a href="#request" aria-controls="request" role="tab" data-toggle="tab">My Organization</a></li>
+	<li role="presentation"><a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">All Organizations</a></li>
+	<li role="presentation"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">My Account</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+<div role="tabpanel" class="tab-pane active" id="home">
+	<%= render :partial => "dashboard/partials/dashboard" %>
+</div>
+<div role="tabpanel" class="tab-pane" id="request">
+	<%= render :partial => "dashboard/partials/organization" %>
+</div>
+<div role="tabpanel" class="tab-pane" id="activity">
+	<%= render :partial => "dashboard/partials/organization_all" %>
+</div>
+<div role="tabpanel" class="tab-pane" id="account">...</div>
+</div>

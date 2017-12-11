@@ -1,3 +1,75 @@
-// Place all the styles related to the dashboard controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+ul{
+	padding: 0px;
+    margin: 0px;
+}
+h1,h2,h3,h4,h5,h6{margin-top: 0px !important;}
+$brand-color: #0f52a7;
+
+.org-box{
+	margin-bottom: 1em;
+    .org-box-wrapper{
+    	border: 1px solid $brand-color;
+    	padding: 1em;
+    	text-align: center;
+	    min-height: 200px;
+	    position: relative;
+    }
+    .title{font-size: 1.5em;}
+    .info{
+        padding-top: 1em;
+        padding-right: 1em;
+        position: absolute;
+	    bottom: 0;
+	    left: 1em;
+	    right: 0;
+	    margin: 0 auto;
+	    text-align: right;
+
+	    ul li{
+	    	display: inline;
+
+	    	&.members{float: left;}
+	    }
+    }
+}
+.dept-box{
+	text-align: center;
+	.dept-box-wrapper{border: 1px solid #ddd;}
+	.dept-row{
+		margin: 1em 0em;
+		padding: 0.7em;
+
+		&:not(:first-child){border-top: 1px solid #ddd;}
+		.dept-icon img{max-height: 2.5em;}
+	}
+}
+.shared-dashboard{
+	.left-box{
+		border: 1px solid #f2f0f1;
+		padding: 1em;
+		.top{
+			ul li{
+				display: inline;
+				img{height: 30px;}
+				&:not(:last-child){padding-right: 1em;}
+			}
+		}
+		.bottom{
+			h6{
+				border-bottom: 1px solid #0f52a7;
+				&:not(:first-child){padding-top: 1em;}
+			}
+			img{height: 30px;}
+			.members li:not(:last-child){padding-right: 0.5em;}
+		}
+	}
+	.center-box{
+		border-top: 1px solid #f2f0f1;
+		border-bottom: 1px solid #f2f0f1;
+		padding: 1em;
+	}
+	.right-box{
+		border: 1px solid #f2f0f1;
+		padding: 1em;
+	}
+}

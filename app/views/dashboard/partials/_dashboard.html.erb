@@ -1,0 +1,45 @@
+<div class="row shared-dashboard">
+	<div class="col-sm-2 left-box">
+		<div class="top text-center">
+			<ul>
+				<li><img src="<%=@cu_organization.image.present? ? @cu_organization.image : ""%>" alt="<%=@cu_organization.name%>"></li>
+				<li><img src="<%=@cu_department.image.present? ? @cu_department.image : ""%>" alt="<%=@cu_department.name%>"></li>
+			</ul>
+			<br>
+			<h6> <strong><%=@cu_organization.name%></strong> </h6>
+			<h4> <strong><%=@cu_department.name%></strong> </h4>
+			<hr>
+		</div><!--top-->
+		<div class="middle">
+			<ul>
+				<li class="name"><h6>User: <strong><%=@currentUser.email%></h6></strong></li>
+				<li class="role"><h6>Status: <%=@currentUser.role%></h6></li>
+				<li> <a href=""><h6>Profile</h6></a> </li>
+				<li> <a href=""><h6>Settings</h6></a> </li>
+			</ul>
+			<hr>
+		</div><!--middle-->
+		<div class="bottom">
+			<h6>Members</h6>
+			<ul class="members">
+				<%@cu_dept_members.each do |dept_user|%>
+					<li> <a href=""> <%= image_tag 'user.png', :title => dept_user.email%> </a> </li>
+				<%end%>
+			</ul>
+			<h6>Editors</h6>
+			<ul class="members">
+				<%@cu_dept_editors.each do |dept_editor|%>
+					<li> <a href=""> <%= image_tag 'editor.jpg', :title => dept_editor.email%> </a> </li>
+				<%end%>
+			</ul>
+			<h6>Reviewers</h6>
+			<ul class="members">
+				<%@cu_dept_reviewers.each do |dept_reviewer|%>
+					<li> <a href=""> <%= image_tag 'reviewer.jpg', :title => dept_reviewer.email%> </a> </li>
+				<%end%>
+			</ul>
+		</div><!--bottom-->
+	</div><!--left-box-->
+	<div class="col-sm-8 center-box"></div><!--center-box-->
+	<div class="col-sm-2 right-box"></div><!--right-box-->
+</div>

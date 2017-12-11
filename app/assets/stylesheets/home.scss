@@ -3,9 +3,13 @@ h1,h2,h3,h4,h5,h6{color: #272727;}
 a, a:hover{
 	color: #272727;
 	text-decoration: none;
-	background: transparent !important;
 }
-.btn{border-radius: 0px !important;}
+.btn,
+input{border-radius: 0px !important;}
+.btn:hover{
+	background: transparent;
+	color: inherit;
+}
 
 
 body{
@@ -25,7 +29,10 @@ body{
     border-radius: 0px !important;
     text-transform: uppercase;
 
-    a, a:hover{color: #fff;}
+    a, a:hover{
+    	color: #fff;
+    	background: transparent !important;
+    }
 
     ul li{font-size: 11px;}
 }

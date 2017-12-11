@@ -1,0 +1,36 @@
+<section id="dashboard-home">
+	<div class="row">
+		<div class="col-sm-12 text-center"> <h4><strong><%= @organization.name%></strong></h4> </div>
+	</div>
+	<hr>
+	<div class="row user-dashboard-departments">
+		<div class="col-sm-12">
+
+			<% @departments.each do |department| %>
+			<div class="col-sm-3 org-box">
+				<div class="org-box-wrapper">
+					<div class="image"> <img src="<%= department.image.present? ? department.image : '' %>" alt="<%= department.name %>"> </div>
+					<div class="info">
+						<ul>
+							<% if User.find(@currentUser.id).dept_requests.where(department_id: department.id).where(status: 0).exists? %>
+								<li>
+									<button class="btn btn-warning">Pending</button>
+								</li>
+							<% elsif User.find(@currentUser.id).dept_requests.where(department_id: department.id).where(status: 1).exists? %>
+								<li><%= link_to "Enter", department_path(department.id), :class=>"btn btn-primary" %></li>
+								<li>
+									<button class="btn btn-success">Member</button>
+								</li>
+							<% else %>
+								<li>
+									<%= link_to "Request to join", dept_join_request_dashboard_index_path(:id => department.id, :o_id => @organization.id), :class => "btn btn-info" %>
+								</li>
+							<% end %>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</section><!--#dashboard-home-->

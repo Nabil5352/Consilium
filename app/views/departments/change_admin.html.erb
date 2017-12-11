@@ -1,0 +1,30 @@
+<div class="page-title">
+    <h3>Change admin for <strong><%= @department.name %></strong> </h3>
+</div>
+
+<%= bootstrap_form_for @department, url: update_admin_departments_path, multipart: true, remote: true, layout: :vertical do |f| %>
+
+	<%if f.object.errors.any?%>
+		<div class="alert alert-danger alert-dismissible" style="margin-top:5px;" role="alert">
+  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  		<strong>Please fix the following fields:</strong>
+  		<ul>
+	        <%f.object.errors.full_messages.each do |message| %>
+	            <li><%= message %></li>
+	        <% end %>
+        </ul> 
+	</div>
+	<%end%>
+	
+	<div class= "row update-admin-row">
+		<div class="col-sm-4">
+			<%= select_tag(:name, options_from_collection_for_select(@reg_users, "id", "email")) %>
+			<%= hidden_field_tag(:department_id, @department.id) %>
+		</div>
+	</div>
+	<br>
+	
+
+	<%= f.submit "CHANGE ADMIN", :class => 'btn btn-primary'%>
+	<br>
+<%end%>
