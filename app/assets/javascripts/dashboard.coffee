@@ -1,3 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).ready ->
+	$('#show-upload').click ->
+	  if $('#file-upload').length > 0
+	  	$('#file-upload').toggleClass 'active'
+
+	$('#show-feedback').click ->
+	  if $('#feedback').length > 0
+	  	$('#feedback').toggleClass 'active'

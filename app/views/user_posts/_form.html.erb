@@ -1,0 +1,57 @@
+<%= form_with(model: user_post, local: true) do |form| %>
+  <% if user_post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_post.errors.count, "error") %> prohibited this user_post from being saved:</h2>
+
+      <ul>
+      <% user_post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id, id: :user_post_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :department_id %>
+    <%= form.number_field :department_id, id: :user_post_department_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :post_type %>
+    <%= form.number_field :post_type, id: :user_post_post_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :post_content %>
+    <%= form.text_area :post_content, id: :user_post_post_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :privacy %>
+    <%= form.number_field :privacy, id: :user_post_privacy %>
+  </div>
+
+  <div class="field">
+    <%= form.label :post_genre %>
+    <%= form.number_field :post_genre, id: :user_post_post_genre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :edit_status %>
+    <%= form.number_field :edit_status, id: :user_post_edit_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :review_status %>
+    <%= form.number_field :review_status, id: :user_post_review_status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

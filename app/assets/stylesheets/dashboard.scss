@@ -2,9 +2,10 @@ ul{
 	padding: 0px;
     margin: 0px;
 }
+a.btn:visited{color: #fff;}
 h1,h2,h3,h4,h5,h6{margin-top: 0px !important;}
 $brand-color: #0f52a7;
-
+.color-red{color: red !important;}
 .org-box{
 	margin-bottom: 1em;
     .org-box-wrapper{
@@ -67,9 +68,49 @@ $brand-color: #0f52a7;
 		border-top: 1px solid #f2f0f1;
 		border-bottom: 1px solid #f2f0f1;
 		padding: 1em;
+
+		#post-now{
+			textarea{padding: 0.5em;}
+			.btn{color: #fff;}
+			label{display: none;}
+			#file-upload{
+				display: none;
+
+				&.active{display: block;}
+			}
+			.form-group{display: inline-block;}
+		}
+		.post-wrapper{
+			.user-img{
+				img{max-height: 60px;}
+			}
+		}
+		.user-post{
+			text-align: justify;
+
+			.options, .info{
+				font-size: 11px;
+				padding-bottom: 1em;
+			}
+			.attachment{font-size: 12px;}
+			.options{
+				margin-left: 1em;
+			}
+		}
 	}
 	.right-box{
 		border: 1px solid #f2f0f1;
 		padding: 1em;
+	}
+}
+.reviewer-table{
+	#feedback{
+		display: none;
+		&.active{display: block;}
+	}
+	label{display: none;}
+	.review-control{
+		float: right;
+		margin-left: 0.5em;
 	}
 }

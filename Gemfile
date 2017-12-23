@@ -17,6 +17,7 @@ end
 gem "paperclip", "~> 4.2"
 gem "pg"
 gem "google-api-client"
+gem "font-awesome-rails"
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets

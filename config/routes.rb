@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
 	devise_for :users
 
 	devise_scope :user do
@@ -24,9 +25,12 @@ Rails.application.routes.draw do
 		get 'org_join_request',						on: :collection
 		get 'approve_org_user',						on: :collection
 		get 'reject_org_user',						on: :collection
-		get 'dept_join_request',						on: :collection
+		get 'dept_join_request',					on: :collection
 		get 'approve_dept_user',					on: :collection
 		get 'reject_dept_user',						on: :collection
+		get 'forward_for_review',					on: :collection
+		get 'reviewer_accepted',					on: :collection
+		get 'reviewer_rejected',					on: :collection
 
 	end
 	resources :organizations
@@ -34,6 +38,12 @@ Rails.application.routes.draw do
 		get 'change_admin',							on: :collection
 		patch 'update_admin',						on: :collection
 	end
+
+  	resources :user_posts do
+  	end
+
+  	resources :editor
+	resources :reviewer
 
 	if Rails.env.development?
 		mount LetterOpenerWeb::Engine, at: "/letter_opener"

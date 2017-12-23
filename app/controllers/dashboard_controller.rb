@@ -122,6 +122,23 @@ class DashboardController < ApplicationController
 		@currentUser = current_user
 		@dept_id = @currentUser.department_id
 		@requests = DeptRequest.all.where(department_id: @dept_id).order("requests desc")
+
+		@currentUser = User.find(current_user.id)
+		@cu_org_id = @currentUser.organization_id
+		@cu_dept_id = @currentUser.department_id
+		@cu_dept_members = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:student])
+		@cu_dept_editors = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:dept_editor])
+		@cu_dept_reviewers = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:dept_reviewer])
+		@cu_organization = Organization.find(@cu_org_id)
+		@cu_department = Department.find(@cu_dept_id)
+		@organizations = Organization.all.where.not(status: "inactive").where.not(status: "secret")
+
+		@this_dept_admin = @currentUser.role == "dept_admin" ? true : false
+
+		@user_post = UserPost.new
+		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post])
+
+		@assing_candidates = User.all.where(role: "user")
 	end
 
 	def dept_join_request
@@ -176,20 +193,106 @@ class DashboardController < ApplicationController
 	end
 
 	def organization_editors
+		@currentUser = current_user
+		@dept_id = @currentUser.department_id
+		@requests = DeptRequest.all.where(department_id: @dept_id).order("requests desc")
+
+		@currentUser = User.find(current_user.id)
+		@cu_org_id = @currentUser.organization_id
+		@cu_dept_id = @currentUser.department_id
+		@cu_dept_members = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:student])
+		@cu_dept_editors = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:dept_editor])
+		@cu_dept_reviewers = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:dept_reviewer])
+		@cu_organization = Organization.find(@cu_org_id)
+		@cu_department = Department.find(@cu_dept_id)
+		@organizations = Organization.all.where.not(status: "inactive").where.not(status: "secret")
+
+		@this_dept_admin = @currentUser.role == "dept_admin" ? true : false
+
+		@user_post = UserPost.new
+		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post])
+		@post_requests = UserPost.all.where(privacy: UserPost.privacies[:private_post])
+	end
+
+	def forward_for_review
+		@post = UserPost.find(params[:id])
+		@post.edit_status = UserPost.edit_statuses[:forwarded]
+
+		if @post.save
+			flash[:success] = "Forwarded successfully"
+			redirect_to dashboard_index_path
+		else
+			flash[:error] = "An error occurred. Please try again."
+			redirect_to dashboard_index_path
+		end
 	end
 
 	def organization_reviewers
+		@currentUser = current_user
+		@dept_id = @currentUser.department_id
+		@requests = DeptRequest.all.where(department_id: @dept_id).order("requests desc")
+
+		@currentUser = User.find(current_user.id)
+		@cu_org_id = @currentUser.organization_id
+		@cu_dept_id = @currentUser.department_id
+		@cu_dept_members = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:student])
+		@cu_dept_editors = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:dept_editor])
+		@cu_dept_reviewers = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:dept_reviewer])
+		@cu_organization = Organization.find(@cu_org_id)
+		@cu_department = Department.find(@cu_dept_id)
+		@organizations = Organization.all.where.not(status: "inactive").where.not(status: "secret")
+
+		@this_dept_admin = @currentUser.role == "dept_admin" ? true : false
+
+		@user_post = UserPost.new
+		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post])
+		@review_posts = UserPost.all.where(edit_status: UserPost.edit_statuses[:forwarded])
+
+		@review = Reviewer.new
+	end
+
+	def reviewer_accepted
+		@post = UserPost.find(params[:id])
+		@post.review_status = UserPost.review_statuses[:on_review]
+
+		if @post.save
+			flash[:success] = "Accepted"
+			redirect_to dashboard_index_path
+		else
+			flash[:error] = "An error occurred. Please try again."
+			redirect_to dashboard_index_path
+		end
+	end
+
+	def reviewer_rejected
+		@post = UserPost.find(params[:id])
+		@post.review_status = UserPost.review_statuses[:rejected]
+
+		if @post.save
+			flash[:success] = "Accepted"
+			redirect_to dashboard_index_path
+		else
+			flash[:error] = "An error occurred. Please try again."
+			redirect_to dashboard_index_path
+		end
 	end
 
 	def organization_students
 		@currentUser = User.find(current_user.id)
 		@cu_org_id = @currentUser.organization_id
 		@cu_dept_id = @currentUser.department_id
-		@cu_dept_members = User.all.where(organization_id: @cu_dept_id).where(role: User.roles[:student])
-		@cu_dept_editors = User.all.where(organization_id: @cu_dept_id).where(role: User.roles[:dept_editor])
-		@cu_dept_reviewers = User.all.where(organization_id: @cu_dept_id).where(role: User.roles[:dept_reviewer])
+		@cu_dept_members = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:student])
+		@cu_dept_editors = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:dept_editor])
+		@cu_dept_reviewers = User.all.where(department_id: @cu_dept_id).where(role: User.roles[:dept_reviewer])
 		@cu_organization = Organization.find(@cu_org_id)
 		@cu_department = Department.find(@cu_dept_id)
 		@organizations = Organization.all.where.not(status: "inactive").where.not(status: "secret")
+
+		@this_dept_admin = @currentUser.role == "dept_admin" ? true : false
+
+		@user_post = UserPost.new
+		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post])
+
+		@reviewed_post = UserPost.all.where(user_id: current_user.id)
 	end
 end

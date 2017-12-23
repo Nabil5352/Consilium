@@ -1,6 +1,6 @@
 ul li{list-style: none;}
 h1,h2,h3,h4,h5,h6{color: #272727;}
-a, a:hover{
+a, a:hover, a:visited{
 	color: #272727;
 	text-decoration: none;
 }
@@ -25,12 +25,12 @@ body{
 
 .navbar-top{
 	background: #0e52a7;
-    color: #fff;
+    color: #fff !important;
     border-radius: 0px !important;
     text-transform: uppercase;
 
     a, a:hover{
-    	color: #fff;
+    	color: #fff !important;
     	background: transparent !important;
     }
 

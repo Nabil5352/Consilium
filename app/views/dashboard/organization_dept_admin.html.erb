@@ -2,13 +2,15 @@
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Overview</a></li>
 	<li role="presentation"><a href="#request" aria-controls="request" role="tab" data-toggle="tab">Requests</a></li>
-	<li role="presentation"><a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">Activity</a></li>
+	<li role="presentation"><a href="#assign_role" aria-controls="assign_role" role="tab" data-toggle="tab">Assign Role</a></li>
 	<li role="presentation"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">Account</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-<div role="tabpanel" class="tab-pane active" id="home">...</div>
+<div role="tabpanel" class="tab-pane active" id="home">
+	<%= render :partial => "dashboard/partials/dashboard" %>
+</div>
 <div role="tabpanel" class="tab-pane" id="request">
 	<table class="table table-striped">
 		<thead>
@@ -46,8 +48,29 @@
 			<% end %>
 		</tbody>
 	</table>
-	
 </div>
-<div role="tabpanel" class="tab-pane" id="activity">...</div>
+<div role="tabpanel" class="tab-pane" id="assign_role">
+<table class="table table-striped">
+		<thead>
+			<th>User</th>
+			<th>Select</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<% @assing_candidates.each do |user| %>
+			<tr>
+				<td><%= user.email %></td>
+				<td>
+					<%= bootstrap_form_for user, url: user_path(user), multipart: true, remote: true, layout: :vertical do |f| %>
+						<%= f.hidden_field :id, value: user.id%>
+						<%= f.select :role, User.roles.keys.reject { |s| s == "superadmin" or s == "org_super_admin" or s == "dept_admin" }.map { |w| [w.humanize, w] }%>
+						<%= f.submit "Assign Role", :class => 'btn btn-primary'%>
+					<% end %>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
 <div role="tabpanel" class="tab-pane" id="account">...</div>
 </div>

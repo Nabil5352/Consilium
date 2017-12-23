@@ -13,7 +13,7 @@
 		<div class="middle">
 			<ul>
 				<li class="name"><h6>User: <strong><%=@currentUser.email%></h6></strong></li>
-				<li class="role"><h6>Status: <%=@currentUser.role%></h6></li>
+				<li class="role"><h6>Status: <%=@currentUser.role.humanize%></h6></li>
 				<li> <a href=""><h6>Profile</h6></a> </li>
 				<li> <a href=""><h6>Settings</h6></a> </li>
 			</ul>
@@ -40,6 +40,104 @@
 			</ul>
 		</div><!--bottom-->
 	</div><!--left-box-->
-	<div class="col-sm-8 center-box"></div><!--center-box-->
-	<div class="col-sm-2 right-box"></div><!--right-box-->
+	<div class="col-sm-8 center-box">
+		<div class="row">
+			<%= bootstrap_form_for @user_post, url: user_posts_path, multipart: true, remote: true, layout: :vertical do |f| %>
+				<%if f.object.errors.any?%>
+					<div class="alert alert-danger alert-dismissible" style="margin-top:5px;" role="alert">
+			  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  		<strong>Please fix the following fields:</strong>
+			  		<ul>
+				        <%f.object.errors.full_messages.each do |message| %>
+				            <li><%= message %></li>
+				        <% end %>
+			        </ul> 
+				</div>
+				<%end%>
+
+				<div class="text-center" id="post-now">
+					<div class="col-sm-12">
+						<ul>
+							<li>
+								<%= f.text_area :post_content, :placeholder => "Write something here", :rows => '3', :cols => '100'%>
+							</li>
+							<li>
+								<%= f.select :post_type, UserPost.post_types.keys.map { |w| [w.humanize, w] },{},{ :class => 'my_style_class' }%>
+								<%= f.select :privacy, UserPost.privacies.keys.map { |w| [w.humanize, w] }%>
+								<%= f.select :post_genre, UserPost.genres.keys.map { |w| [w.humanize, w] }%>
+							</li>
+							<li id="file-upload" class="">
+								<%= f.file_field :document %>
+							</li>
+							<li> <a id="show-upload" class="btn btn-success">Upload</a>&nbsp;&nbsp;<%= f.submit "Post now", :class => 'btn btn-primary'%></li>
+						</ul>
+					</div>
+				</div><!--post-now-->
+			<% end %>
+		</div>
+
+		<hr>
+
+		<% @all_post.each do |post|%>
+		<div class="row">
+			<div class="col-sm-12 post-wrapper">
+				<div class="col-sm-2 user-img text-center">
+					<div class="user-img-wrapper">
+						<a href=""> <%= image_tag 'user.png', :title => ""%> </a>
+						<p><strong><%= User.find(post.user_id).email%></strong></p>
+					</div>
+				</div>
+				<div class="col-sm-10 user-post">
+					<div class="options pull-right">
+						<div class="dropdown">
+						  <div href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+						  <ul class="dropdown-menu" aria-labelledby="dLabel">
+						  	<%if post.user_id == @currentUser.id%>
+						    <li><a href="">Edit</a></li>
+						    <li><a href="" class="color-red">Delete</a></li>
+						    <%end%>
+						    <%if @this_dept_admin %>
+						    <li><a href="">Block user</a></li>
+						    <%end%>
+						  </ul>
+						</div>
+					</div>
+					<div class="info">
+						<span class="pull-left"> <i><%= User.find(post.user_id).email%> 
+							<%if post.post_type == "file"%>
+								Uploaded a document
+							<%elsif post.post_type == "post"%>
+								Posted a post
+							<%elsif post.post_type == "both"%>
+								Posted a post and Uploaded a document
+							<%end%>
+						</i> </span>
+						<span class="pull-right"> <strong><%= post.created_at %></strong> </span>
+					</div><br>
+					<div class="content">
+						<%= post.post_content%>
+					</div><br>
+					<div class="attachment">
+						<%if post.document.exists?%>
+						<i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;attachment included <a href="<%=post.document.url%>"><%=post.document_file_name[0..50]%></a>
+						<%end%>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<%end%>
+
+	</div><!--center-box-->
+	<div class="col-sm-2 right-box">
+		<a class="btn btn-block btn-default">Compose</a>
+		<a class="btn btn-block btn-primary">Inbox</a>
+
+		<hr>
+
+		<div class="chatbox">
+			<div class="header text-center"><h4>CHATBOX</h4></div>
+			<div class="contents"></div>
+		</div>
+	</div><!--right-box-->
 </div>

@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
 	has_many :requests
 	has_many :dept_requests
+	has_many :user_posts
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable

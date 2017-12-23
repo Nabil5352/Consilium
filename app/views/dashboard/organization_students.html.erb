@@ -1,8 +1,9 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Dashboard</a></li>
-	<li role="presentation"><a href="#request" aria-controls="request" role="tab" data-toggle="tab">My Organization</a></li>
-	<li role="presentation"><a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">All Organizations</a></li>
+	<li role="presentation"><a href="#my_org" aria-controls="my_org" role="tab" data-toggle="tab">My Organization</a></li>
+	<li role="presentation"><a href="#my_posts" aria-controls="my_posts" role="tab" data-toggle="tab">My Posts</a></li>
+	<li role="presentation"><a href="#all_org" aria-controls="all_org" role="tab" data-toggle="tab">All Organizations</a></li>
 	<li role="presentation"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">My Account</a></li>
 </ul>
 
@@ -11,10 +12,44 @@
 <div role="tabpanel" class="tab-pane active" id="home">
 	<%= render :partial => "dashboard/partials/dashboard" %>
 </div>
-<div role="tabpanel" class="tab-pane" id="request">
+<div role="tabpanel" class="tab-pane" id="my_org">
 	<%= render :partial => "dashboard/partials/organization" %>
 </div>
-<div role="tabpanel" class="tab-pane" id="activity">
+<div role="tabpanel" class="tab-pane" id="my_posts">
+	<table class="table table-striped reviewer-table">
+		<thead>
+			<th>Post type</th>
+			<th>Content</th>
+			<th>Document?</th>
+			<th>Editor status</th>
+			<th>Reviewer status</th>
+			<th>Feedback?</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<% @reviewed_post.each do |post| %>
+				<tr>
+					<td><%= post.post_type %></td>
+					<td><%= post.post_content %></td>
+					<td>
+						<% if post.document.exists? %> 
+							<a href='<%=post.document.url%>'>Download</a> 
+						<% elsif %> 
+							NO 
+						<% end %>
+					</td>
+					<td><strong>Editor:</strong> <%= post.edit_status.humanize %></td>
+					<td><strong>Reviewer:</strong> <%= post.review_status.humanize %></td>
+					<td>
+						
+					</td>
+					<td></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<div role="tabpanel" class="tab-pane" id="all_org">
 	<%= render :partial => "dashboard/partials/organization_all" %>
 </div>
 <div role="tabpanel" class="tab-pane" id="account">...</div>

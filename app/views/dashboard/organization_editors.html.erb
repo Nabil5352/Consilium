@@ -1,1 +1,43 @@
-EDITOR 
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+	<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Dashboard</a></li>
+	<li role="presentation"><a href="#my_org" aria-controls="my_org" role="tab" data-toggle="tab">My Organization</a></li>
+	<li role="presentation"><a href="#edit_rqst" aria-controls="edit_rqst" role="tab" data-toggle="tab">Edit request</a></li>
+	<li role="presentation"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">My Account</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+<div role="tabpanel" class="tab-pane active" id="home">
+	<%= render :partial => "dashboard/partials/dashboard" %>
+</div>
+<div role="tabpanel" class="tab-pane" id="my_org">
+	<%= render :partial => "dashboard/partials/organization" %>
+</div>
+<div role="tabpanel" class="tab-pane" id="edit_rqst">
+	<table class="table table-striped">
+		<thead>
+			<th>Requested from</th>
+			<th>Post type</th>
+			<th>Current status</th>
+			<th>Document?</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<% @post_requests.each do |post| %>
+			<tr>
+				<td><%= User.find(post.user_id).email %></td>
+				<td><%= post.post_type %></td>
+				<td>
+					<strong>Editor:</strong> <%= post.edit_status.humanize %> <br>
+					<strong>Reviewer:</strong> <%= post.review_status.humanize %>
+				</td>
+				<td><%= post.document.exists? ? "YES" : "NO" %></td>
+				<td> <%= link_to "Forward", forward_for_review_dashboard_index_path(:id => post.id) %> </td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<div role="tabpanel" class="tab-pane" id="account">...</div>
+</div>

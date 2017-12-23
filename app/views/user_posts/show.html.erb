@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_post.user_id %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @user_post.department_id %>
+</p>
+
+<p>
+  <strong>Post type:</strong>
+  <%= @user_post.post_type %>
+</p>
+
+<p>
+  <strong>Post content:</strong>
+  <%= @user_post.post_content %>
+</p>
+
+<p>
+  <strong>Privacy:</strong>
+  <%= @user_post.privacy %>
+</p>
+
+<p>
+  <strong>Post genre:</strong>
+  <%= @user_post.post_genre %>
+</p>
+
+<p>
+  <strong>Edit status:</strong>
+  <%= @user_post.edit_status %>
+</p>
+
+<p>
+  <strong>Review status:</strong>
+  <%= @user_post.review_status %>
+</p>
+
+<%= link_to 'Edit', edit_user_post_path(@user_post) %> |
+<%= link_to 'Back', user_posts_path %>
