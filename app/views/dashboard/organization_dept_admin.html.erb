@@ -63,6 +63,7 @@
 				<td>
 					<%= bootstrap_form_for user, url: user_path(user), multipart: true, remote: true, layout: :vertical do |f| %>
 						<%= f.hidden_field :id, value: user.id%>
+						<%= f.hidden_field :department_id, value: @dept_id%>
 						<%= f.select :role, User.roles.keys.reject { |s| s == "superadmin" or s == "org_super_admin" or s == "dept_admin" }.map { |w| [w.humanize, w] }%>
 						<%= f.submit "Assign Role", :class => 'btn btn-primary'%>
 					<% end %>
