@@ -2,8 +2,12 @@
 	<div class="col-sm-2 left-box">
 		<div class="top text-center">
 			<ul>
+				<!--
 				<li><img src="<%=@cu_organization.image.present? ? @cu_organization.image : ""%>" alt="<%=@cu_organization.name%>"></li>
 				<li><img src="<%=@cu_department.image.present? ? @cu_department.image : ""%>" alt="<%=@cu_department.name%>"></li>
+				-->
+				<li><img src="http://www.hsdtaxlaw.com/wp-content/uploads/2016/05/20140806_LogoSupporterPlaceholder.png"></li>
+				<li><img src="http://www.hsdtaxlaw.com/wp-content/uploads/2016/05/20140806_LogoSupporterPlaceholder.png"></li>
 			</ul>
 			<br>
 			<h6> <strong><%=@cu_organization.name%></strong> </h6>
@@ -23,19 +27,22 @@
 			<h6>Members</h6>
 			<ul class="members">
 				<%@cu_dept_members.each do |dept_user|%>
-					<li> <a href=""> <%= image_tag 'user.png', :title => dept_user.email%> </a> </li>
+					<!--<li> <a href=""> <%= image_tag 'user.png', :title => dept_user.email%> </a> </li>-->
+					<li> <img src="http://www.hsdtaxlaw.com/wp-content/uploads/2016/05/20140806_LogoSupporterPlaceholder.png" title="<%=dept_user.email%>"> </li>
 				<%end%>
 			</ul>
 			<h6>Editors</h6>
 			<ul class="members">
 				<%@cu_dept_editors.each do |dept_editor|%>
-					<li> <a href=""> <%= image_tag 'editor.jpg', :title => dept_editor.email%> </a> </li>
+					<!--<li> <a href=""> <%= image_tag 'editor.jpg', :title => dept_editor.email%> </a> </li>-->
+					<li> <img src="http://www.hsdtaxlaw.com/wp-content/uploads/2016/05/20140806_LogoSupporterPlaceholder.png" title="<%=dept_editor.email%>"> </li>
 				<%end%>
 			</ul>
 			<h6>Reviewers</h6>
 			<ul class="members">
 				<%@cu_dept_reviewers.each do |dept_reviewer|%>
-					<li> <a href=""> <%= image_tag 'reviewer.jpg', :title => dept_reviewer.email%> </a> </li>
+					<!--<li> <a href=""> <%= image_tag 'reviewer.jpg', :title => dept_reviewer.email%> </a> </li>-->
+					<li> <img src="http://www.hsdtaxlaw.com/wp-content/uploads/2016/05/20140806_LogoSupporterPlaceholder.png" title="<%=dept_reviewer.email%>"> </li>
 				<%end%>
 			</ul>
 		</div><!--bottom-->
@@ -83,7 +90,10 @@
 			<div class="col-sm-12 post-wrapper">
 				<div class="col-sm-2 user-img text-center">
 					<div class="user-img-wrapper">
-						<a href=""> <%= image_tag 'user.png', :title => ""%> </a>
+						<a href=""> 
+							<!--<%= image_tag 'user.png', :title => ""%> -->
+							<img src="http://www.hsdtaxlaw.com/wp-content/uploads/2016/05/20140806_LogoSupporterPlaceholder.png" title="<%=User.find(post.user_id).email%>">
+						</a>
 						<p><strong><%= User.find(post.user_id).email%></strong></p>
 					</div>
 				</div>
@@ -138,6 +148,14 @@
 		<div class="chatbox">
 			<div class="header text-center"><h4>CHATBOX</h4></div>
 			<div class="contents"></div>
+		</div>
+
+		<div class="guides">
+			<ul>
+				<li><a href="">Terms and conditions</a></li>
+				<li><a href="">Help and support</a></li>
+				<li><a href="">Allowed parameters</a></li>
+			</ul>
 		</div>
 	</div><!--right-box-->
 </div>
