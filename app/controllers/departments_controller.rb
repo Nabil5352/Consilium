@@ -26,7 +26,7 @@ class DepartmentsController < ApplicationController
 
 	def change_admin
 		@department = Department.find(params[:id])
-		@reg_users = User.all.where(role: :user)
+		@reg_users = User.all.where(organization_id: @department.organization_id).where(role: :user)
 	end
 
 	def update_admin
