@@ -23,9 +23,11 @@
 			<% @departments.each do |department| %>
 				<div class="row dept-row">
 					<div class="col-sm-1 dept-icon"> 
-						<%if department.image.present?%>
+						<!--<%if department.image.present?%>
 							<%= image_tag "#{department.image}" %>
 						<%end%>
+						-->
+						<img src="http://www.hsdtaxlaw.com/wp-content/uploads/2016/05/20140806_LogoSupporterPlaceholder.png">
 					</div>
 					<div class="col-sm-6"> <%= link_to department.name, edit_department_path(department)%> </div>
 					<div class="col-sm-5"> 

@@ -138,7 +138,7 @@ class DashboardController < ApplicationController
 		@user_post = UserPost.new
 		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post])
 
-		@assing_candidates = User.all.where(role: "user")
+		@assing_candidates = User.all.where(organization_id: @cu_org_id).where(role: "user")
 	end
 
 	def dept_join_request
