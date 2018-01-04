@@ -136,7 +136,7 @@ class DashboardController < ApplicationController
 		@this_dept_admin = @currentUser.role == "dept_admin" ? true : false
 
 		@user_post = UserPost.new
-		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post])
+		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post]).order(created_at: :desc)
 
 		@assing_candidates = User.all.where(organization_id: @cu_org_id).where(role: "user")
 	end
@@ -210,7 +210,7 @@ class DashboardController < ApplicationController
 		@this_dept_admin = @currentUser.role == "dept_admin" ? true : false
 
 		@user_post = UserPost.new
-		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post])
+		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post]).order(created_at: :desc)
 		@post_requests = UserPost.all.where(privacy: UserPost.privacies[:private_post])
 	end
 
@@ -245,7 +245,7 @@ class DashboardController < ApplicationController
 		@this_dept_admin = @currentUser.role == "dept_admin" ? true : false
 
 		@user_post = UserPost.new
-		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post])
+		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post]).order(created_at: :desc)
 		@review_posts = UserPost.all.where(edit_status: UserPost.edit_statuses[:forwarded])
 
 		@review = Reviewer.new
@@ -287,11 +287,12 @@ class DashboardController < ApplicationController
 		@cu_organization = Organization.find(@cu_org_id)
 		@cu_department = Department.find(@cu_dept_id)
 		@organizations = Organization.all.where.not(status: "inactive").where.not(status: "secret")
+		@reviews = Reviewer.all.where(department_id: @cu_dept_id)
 
 		@this_dept_admin = @currentUser.role == "dept_admin" ? true : false
 
 		@user_post = UserPost.new
-		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post])
+		@all_post = UserPost.all.where(privacy: UserPost.privacies[:public_post]).order(created_at: :desc)
 
 		@reviewed_post = UserPost.all.where(user_id: current_user.id)
 	end

@@ -6,9 +6,12 @@
 		<div class="dept-box-wrapper">
 			<div class="row dept-row">
 				<div class="col-sm-6 dept-icon"> 
+					<!--
 					<%if @cu_organization.image.present?%>
 						<%= image_tag "#{@cu_organization.image}" %>
 					<%end%>
+					-->
+					<img src="http://www.hsdtaxlaw.com/wp-content/uploads/2016/05/20140806_LogoSupporterPlaceholder.png" title="<%=@cu_organization.name%>">
 				</div>
 				<div class="col-sm-6"> <%= @cu_organization.name%> </div>
 			</div>
@@ -20,9 +23,12 @@
 		<div class="dept-box-wrapper">
 			<div class="row dept-row">
 				<div class="col-sm-6 dept-icon"> 
+					<!--
 					<%if @cu_department.image.present?%>
 						<%= image_tag "#{@cu_department.image}" %>
 					<%end%>
+					-->
+					<img src="http://www.hsdtaxlaw.com/wp-content/uploads/2016/05/20140806_LogoSupporterPlaceholder.png" title="<%=@cu_department.name%>">
 				</div>
 				<div class="col-sm-6"> <%=@cu_department.name%> </div>
 			</div>

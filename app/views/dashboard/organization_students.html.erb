@@ -41,7 +41,13 @@
 					<td><strong>Editor:</strong> <%= post.edit_status.humanize %></td>
 					<td><strong>Reviewer:</strong> <%= post.review_status.humanize %></td>
 					<td>
-						
+						<ul>
+							<% @reviews.each do |reviews| %>
+								<%if reviews.post_id == post.id%>
+									<li><%= reviews.feedback %></li>
+								<%end%>
+							<% end %>
+						</ul>
 					</td>
 					<td></td>
 				</tr>

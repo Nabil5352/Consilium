@@ -102,9 +102,13 @@
 						<div class="dropdown">
 						  <div href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
 						  <ul class="dropdown-menu" aria-labelledby="dLabel">
-						  	<%if post.user_id == @currentUser.id%>
+						  	<%if post.user_id == @currentUser.id %>
 						    <li><a href="">Edit</a></li>
-						    <li><a href="" class="color-red">Delete</a></li>
+						    <%end%>
+						    <%if post.user_id == @currentUser.id or @this_dept_admin %>
+						    <li>
+						    	<%= link_to "Delete",  user_post_path(post), method: :delete, :class => "color-red", data: { confirm: 'Are you sure?' } %>
+						    </li>
 						    <%end%>
 						    <%if @this_dept_admin %>
 						    <li><a href="">Block user</a></li>
