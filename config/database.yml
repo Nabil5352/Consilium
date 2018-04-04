@@ -34,8 +34,8 @@ default: &default
 development:
   <<: *default
   database: consilium_development
-  username: nabil
-  password: simple123
+  username: ###
+  password: ###
 
 test:
   <<: *default
